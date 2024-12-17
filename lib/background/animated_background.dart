@@ -14,19 +14,19 @@ class _AnimatedBackgroundState extends State<AnimatedBackground> {
   // Liste des dégradés pastels pour l'animation
   final List<List<Color>> _gradients = [
     [
-      const Color(0xFFA8DADC),
-      const Color(0xFFBDE0FE),
-      const Color(0xFFFFC8A2)
+      const Color(0xFFB4FFA0),
+      const Color(0xFFA3CBFF),
+      const Color(0xFFFFC19D)
     ], // Bleu pastel -> Vert pastel -> Orange pastel
     [
-      const Color(0xFFBDE0FE),
-      const Color(0xFFFFC8A2),
-      const Color(0xFFA8DADC)
+      const Color(0xFFA3CBFF),
+      const Color(0xFFFFC19D),
+      const Color(0xFFB4FFA0)
     ], // Rotation des couleurs
     [
-      const Color(0xFFFFC8A2),
-      const Color(0xFFA8DADC),
-      const Color(0xFFBDE0FE)
+      const Color(0xFFFFC19D),
+      const Color(0xFFB4FFA0),
+      const Color(0xFFA3CBFF)
     ], // Autre combinaison
   ];
 
