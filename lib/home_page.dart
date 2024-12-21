@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'features_screen.dart';
 import 'background/animated_background.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,6 +8,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Redirection après 8 secondes
+    Timer(const Duration(seconds: 8), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const FeaturesScreen()),
+      );
+    });
+
     return Scaffold(
       body: AnimatedBackground(
         child: Center(

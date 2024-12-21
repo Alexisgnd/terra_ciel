@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'home_page.dart.dart';
+import 'home_page.dart';
 
 void main() {
   runApp(const MyApp());
