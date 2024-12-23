@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'features_screen.dart';
+import 'screen1.dart';
 import 'background/animated_background.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Redirection après 8 secondes
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    // Navigation automatique après 8 secondes
     Timer(const Duration(seconds: 8), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const FeaturesScreen()),
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Screen1()),
       );
     });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBackground(
         child: Center(
