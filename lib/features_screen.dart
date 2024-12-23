@@ -19,6 +19,7 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // PageView pour afficher les écrans
           PageView(
             controller: _pageController,
             onPageChanged: (int page) {

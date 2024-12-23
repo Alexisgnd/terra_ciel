@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'background/animated_background.dart';
+import 'screen2.dart';
 
 class Screen1 extends StatelessWidget {
   const Screen1({super.key});
@@ -17,7 +18,7 @@ class Screen1 extends StatelessWidget {
               left: 0,
               right: 0,
               child: Transform.rotate(
-                angle: 158 * (3.141592653589793 / 180), // Rotation à 255°
+                angle: 158 * (3.141592653589793 / 180), // Rotation à 158°
                 child: Image.asset(
                   'assets/logo.png',
                   width: 400,
@@ -74,6 +75,7 @@ class Screen1 extends StatelessWidget {
                 ),
                 // Rectangle avec le bouton
                 Container(
+                  width: double.infinity, // Rectangle prend toute la largeur
                   decoration: const BoxDecoration(
                     color: Color(0xFFFFF4E1), // Fond orange clair
                     borderRadius: BorderRadius.only(
@@ -88,25 +90,56 @@ class Screen1 extends StatelessWidget {
                       ),
                     ],
                   ),
-                  padding: const EdgeInsets.all(20),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFFA500), // Orange vif
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Center(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFFFA500), // Orange vif
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40, // Largeur du bouton
+                          vertical: 15, // Hauteur du bouton
+                        ),
                       ),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      "Découvrir →",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
+                      onPressed: () {},
+                      child: const Text(
+                        "Découvrir →",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ],
+            ),
+            // Flèche gauche pour revenir en arrière
+            Positioned(
+              left: 10,
+              top: MediaQuery.of(context).size.height / 2 - 30,
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_ios,
+                    size: 30, color: Colors.black54),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            // Flèche droite pour avancer
+            Positioned(
+              right: 10,
+              top: MediaQuery.of(context).size.height / 2 - 30,
+              child: IconButton(
+                icon: const Icon(Icons.arrow_forward_ios,
+                    size: 30, color: Colors.black54),
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Screen2()));
+                },
+              ),
             ),
           ],
         ),
