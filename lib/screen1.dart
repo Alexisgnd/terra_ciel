@@ -41,6 +41,7 @@ class Screen1 extends StatelessWidget {
                             "Faites rayonner vos sorties !",
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              fontFamily: 'Poppins',
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
@@ -51,6 +52,7 @@ class Screen1 extends StatelessWidget {
                             "Planifiez vos sorties en toute sérénité grâce à nos prévisions météorologiques précises et personnalisées.",
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              fontFamily: 'Poppins',
                               fontSize: 16,
                               color: Colors.black87,
                             ),
@@ -60,6 +62,7 @@ class Screen1 extends StatelessWidget {
                             "Organisez vos pique-niques, sorties en famille ou escapades entre amis en toute confiance.",
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              fontFamily: 'Poppins',
                               fontSize: 16,
                               color: Colors.black54,
                             ),
@@ -96,7 +99,10 @@ class Screen1 extends StatelessWidget {
                     onPressed: () {},
                     child: const Text(
                       "Découvrir →",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
