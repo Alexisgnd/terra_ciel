@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'background/animated_background.dart';
+import 'screen3.dart'; // Importez Screen3
 
 class Screen2 extends StatelessWidget {
   const Screen2({super.key});
@@ -150,7 +151,9 @@ class Screen2 extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Screen2()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const Screen3()), // Navigue vers Screen3
                   );
                 },
               ),
