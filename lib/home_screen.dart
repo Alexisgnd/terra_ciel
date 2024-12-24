@@ -11,6 +11,43 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Header
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Menu hamburger
+                  IconButton(
+                    icon: const Icon(Icons.menu,
+                        size: 28, color: Color(0xFF2D4379)),
+                    onPressed: () {
+                      // Action pour le menu
+                    },
+                  ),
+                  // Photo de profil ronde
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.grey[300], // Placeholder gris
+                    child: const Icon(
+                      Icons.person,
+                      size: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             // Section météo
             Padding(
               padding: const EdgeInsets.all(16.0),
