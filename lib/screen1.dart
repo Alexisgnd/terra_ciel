@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:terra_ciel/home_screen.dart';
 import 'package:terra_ciel/widgets/animated_logo.dart';
 import 'background/animated_background.dart';
 import 'screen2.dart';
@@ -97,7 +98,7 @@ class Screen1 extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const Screen2(),
+                          builder: (context) => const HomeScreen(),
                         ),
                       );
                     },

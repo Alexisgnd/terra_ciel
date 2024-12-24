@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'home_page.dart';
+import 'welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());

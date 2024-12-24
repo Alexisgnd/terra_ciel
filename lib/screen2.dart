@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:terra_ciel/home_screen.dart';
 import 'package:terra_ciel/widgets/animated_logo.dart';
 import 'background/animated_background.dart';
 import 'screen3.dart';
@@ -94,7 +95,13 @@ class Screen2 extends StatelessWidget {
                         vertical: 15,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       "Explorer →",
                       style: TextStyle(
