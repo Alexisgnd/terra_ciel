@@ -3,13 +3,16 @@ import 'dart:async';
 
 class AnimatedBackground extends StatefulWidget {
   final Widget child;
-  final bool
-      useOrangeGradient; // Ajout pour Screen1 (true = dégradé orangé uniquement)
+  final bool useOrangeGradient;
+  final bool useBlueGradient;
+  final bool useGreenGradient;
 
   const AnimatedBackground({
     super.key,
     required this.child,
-    this.useOrangeGradient = false, // Par défaut, mélange des trois couleurs
+    this.useOrangeGradient = false,
+    this.useBlueGradient = false,
+    this.useGreenGradient = false,
   });
 
   @override
@@ -25,32 +28,41 @@ class _AnimatedBackgroundState extends State<AnimatedBackground> {
   void initState() {
     super.initState();
 
-    // Dégradés utilisés (orange ou mixte selon `useOrangeGradient`)
-    _gradients = widget.useOrangeGradient
-        ? [
-            [
-              const Color(0xFFFFF4E1),
-              const Color(0xFFFFC19D)
-            ], // Dégradé orangé
-            [const Color(0xFFFFC19D), const Color(0xFFFFE4C1)],
-          ]
-        : [
-            [
-              const Color(0xFFB4FFA0),
-              const Color(0xFFA3CBFF),
-              const Color(0xFFFFC19D)
-            ], // Vert, bleu, orange
-            [
-              const Color(0xFFA3CBFF),
-              const Color(0xFFFFC19D),
-              const Color(0xFFB4FFA0)
-            ], // Bleu, orange, vert
-            [
-              const Color(0xFFFFC19D),
-              const Color(0xFFB4FFA0),
-              const Color(0xFFA3CBFF)
-            ], // Orange, vert, bleu
-          ];
+    // Dégradés utilisés (orange, bleu, vert ou mixte selon les paramètres)
+    if (widget.useOrangeGradient) {
+      _gradients = [
+        [const Color(0xFFFFF4E1), const Color(0xFFFFC19D)], // Dégradé orangé
+        [const Color(0xFFFFC19D), const Color(0xFFFFE4C1)],
+      ];
+    } else if (widget.useBlueGradient) {
+      _gradients = [
+        [const Color(0xFFE7F3FF), const Color(0xFF69BFFF)], // Dégradé bleu
+        [const Color(0xFF69BFFF), const Color(0xFFA0B9FF)],
+      ];
+    } else if (widget.useGreenGradient) {
+      _gradients = [
+        [const Color(0xFFB4FFA0), const Color(0xFF69FFB4)], // Dégradé vert
+        [const Color(0xFF69FFB4), const Color(0xFFB4FFA0)],
+      ];
+    } else {
+      _gradients = [
+        [
+          const Color(0xFFB4FFA0),
+          const Color(0xFFA3CBFF),
+          const Color(0xFFFFC19D)
+        ], // Vert, bleu, orange
+        [
+          const Color(0xFFA3CBFF),
+          const Color(0xFFFFC19D),
+          const Color(0xFFB4FFA0)
+        ], // Bleu, orange, vert
+        [
+          const Color(0xFFFFC19D),
+          const Color(0xFFB4FFA0),
+          const Color(0xFFA3CBFF)
+        ], // Orange, vert, bleu
+      ];
+    }
 
     _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       if (mounted) {

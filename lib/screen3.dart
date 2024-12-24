@@ -8,7 +8,7 @@ class Screen3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBackground(
-        useOrangeGradient: false, // Change gradient if needed
+        useGreenGradient: true, // Utilise le dégradé vert spécifique
         child: Stack(
           children: [
             // Logo avec rotation qui dépasse le haut de l'écran
@@ -76,7 +76,7 @@ class Screen3 extends StatelessWidget {
                 Container(
                   width: double.infinity, // Rectangle prend toute la largeur
                   decoration: const BoxDecoration(
-                    color: Color(0xFFE7F3FF), // Fond bleu clair
+                    color: Color(0xFFB4FFA0), // Fond vert clair
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(45),
                       topRight: Radius.circular(45),
@@ -93,7 +93,7 @@ class Screen3 extends StatelessWidget {
                   child: Center(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF69BFFF), // Bleu vif
+                        backgroundColor: const Color(0xFF69FFB4), // Vert vif
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),

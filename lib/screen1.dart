@@ -12,117 +12,134 @@ class Screen1 extends StatelessWidget {
         useOrangeGradient: true, // Utilise le dégradé orangé spécifique
         child: Stack(
           children: [
-            // Logo avec rotation qui dépasse le haut de l'écran
+            // Logo avec rotation animée qui dépasse le haut de l'écran
             Positioned(
-              top: -200, // Décalage pour dépasser le haut de l'écran
+              top: -200,
               left: 0,
               right: 0,
-              child: Transform.rotate(
-                angle: 158 * (3.141592653589793 / 180), // Rotation à 158°
-                child: Image.asset(
-                  'assets/logo.png',
-                  width: 400,
-                  height: 400,
-                  fit: BoxFit.contain,
-                ),
+              child: TweenAnimationBuilder<double>(
+                tween: Tween<double>(begin: 0, end: 158),
+                duration: const Duration(milliseconds: 800),
+                builder: (context, angle, child) {
+                  return Transform.rotate(
+                    angle: angle * (3.141592653589793 / 180),
+                    child: Image.asset(
+                      'assets/logo.png',
+                      width: 400,
+                      height: 400,
+                      fit: BoxFit.contain,
+                    ),
+                  );
+                },
               ),
             ),
-            // Contenu principal
-            Column(
+            // Texte principal
+            const Column(
               children: [
-                const SizedBox(height: 250), // Espace sous le logo
-                const Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Faites rayonner vos sorties !",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Planifiez vos sorties en toute sérénité grâce à nos prévisions météorologiques précises et personnalisées.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 16,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Organisez vos pique-niques, sorties en famille ou escapades entre amis en toute confiance.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 16,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
-                      ),
+                SizedBox(height: 250), // Décalage sous le logo
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Faites rayonner vos sorties !",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
                 ),
-                // Rectangle avec le bouton
-                Container(
-                  width: double.infinity, // Rectangle prend toute la largeur
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFFFF4E1), // Fond orange clair
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(45),
-                      topRight: Radius.circular(45),
+                SizedBox(height: 10),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Planifiez vos sorties en toute sérénité grâce à nos prévisions météorologiques précises et personnalisées.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      color: Colors.black87,
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(0, -5),
-                      ),
-                    ],
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFA500), // Orange vif
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40, // Largeur du bouton
-                          vertical: 15, // Hauteur du bouton
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        "Découvrir →",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                        ),
-                      ),
+                ),
+                SizedBox(height: 10),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Organisez vos pique-niques, sorties en famille ou escapades entre amis en toute confiance.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      color: Colors.black54,
                     ),
                   ),
                 ),
               ],
+            ),
+            // Rectangle avec le bouton
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                width: double.infinity, // Rectangle prend toute la largeur
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFF4E1), // Fond orange clair
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(45),
+                    topRight: Radius.circular(45),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, -5),
+                    ),
+                  ],
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFFFA500), // Orange vif
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40, // Largeur du bouton
+                        vertical: 15, // Hauteur du bouton
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const Screen2(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Découvrir →",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             // Flèche gauche pour revenir en arrière
             Positioned(
               left: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
               child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios,
-                    size: 30, color: Colors.black54),
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 30,
+                  color: Colors.black54,
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -133,11 +150,15 @@ class Screen1 extends StatelessWidget {
               right: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
               child: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios,
-                    size: 30, color: Colors.black54),
+                icon: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 30,
+                  color: Colors.black54,
+                ),
                 onPressed: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const Screen2()));
+                    MaterialPageRoute(builder: (context) => const Screen2()),
+                  );
                 },
               ),
             ),
