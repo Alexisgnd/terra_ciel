@@ -130,19 +130,17 @@ class Screen1 extends StatelessWidget {
                 ),
               ),
             ),
-            // Flèche gauche pour revenir en arrière
+            // Flèche gauche désactivée et grisée
             Positioned(
               left: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
-              child: IconButton(
-                icon: const Icon(
+              child: const IconButton(
+                icon: Icon(
                   Icons.arrow_back_ios,
                   size: 30,
-                  color: Colors.black54,
+                  color: Colors.grey, // Couleur grisée
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                onPressed: null, // Désactive le bouton
               ),
             ),
             // Flèche droite pour avancer

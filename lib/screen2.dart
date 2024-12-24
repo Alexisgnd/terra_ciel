@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'background/animated_background.dart';
+import 'widgets/animated_logo.dart';
 import 'screen3.dart'; // Importez Screen3
 
 class Screen2 extends StatelessWidget {
@@ -13,26 +14,7 @@ class Screen2 extends StatelessWidget {
         child: Stack(
           children: [
             // Logo avec rotation animée qui dépasse le haut de l'écran
-            Positioned(
-              top: -200,
-              left: 0,
-              right: 0,
-              child: TweenAnimationBuilder<double>(
-                tween: Tween<double>(begin: 158, end: 277),
-                duration: const Duration(milliseconds: 800),
-                builder: (context, angle, child) {
-                  return Transform.rotate(
-                    angle: angle * (3.141592653589793 / 180),
-                    child: Image.asset(
-                      'assets/logo.png',
-                      width: 400,
-                      height: 400,
-                      fit: BoxFit.contain,
-                    ),
-                  );
-                },
-              ),
-            ),
+            const AnimatedLogo(rotationAngle: 277), // Rotation à 277°
             // Texte principal
             const Column(
               children: [
