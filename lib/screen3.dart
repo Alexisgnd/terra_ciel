@@ -120,9 +120,9 @@ class Screen3 extends StatelessWidget {
             Positioned(
               right: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios,
-                    size: 30, color: Colors.grey),
+              child: const IconButton(
+                icon:
+                    Icon(Icons.arrow_forward_ios, size: 30, color: Colors.grey),
                 onPressed: null, // Flèche droite désactivée
               ),
             ),
