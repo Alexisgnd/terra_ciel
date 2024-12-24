@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:terra_ciel/widgets/animated_logo.dart';
 import 'background/animated_background.dart';
-import 'widgets/animated_logo.dart';
-import 'screen3.dart'; // Importez Screen3
+import 'screen3.dart';
 
 class Screen2 extends StatelessWidget {
   const Screen2({super.key});
@@ -10,15 +10,15 @@ class Screen2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBackground(
-        useBlueGradient: true, // Utilise le dégradé bleu spécifique
+        useBlueGradient: true,
         child: Stack(
           children: [
-            // Logo avec rotation animée qui dépasse le haut de l'écran
-            const AnimatedLogo(rotationAngle: 277), // Rotation à 277°
+            // Logo avec rotation animée
+            const AnimatedLogo(rotationAngle: 277),
             // Texte principal
             const Column(
               children: [
-                SizedBox(height: 250), // Décalage sous le logo
+                SizedBox(height: 250),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
@@ -66,9 +66,9 @@ class Screen2 extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                width: double.infinity, // Rectangle prend toute la largeur
+                width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE7F3FF), // Fond bleu clair
+                  color: Color(0xFFE7F3FF),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(45),
                     topRight: Radius.circular(45),
@@ -85,13 +85,13 @@ class Screen2 extends StatelessWidget {
                 child: Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF69BFFF), // Bleu vif
+                      backgroundColor: const Color(0xFF69BFFF),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 40, // Largeur du bouton
-                        vertical: 15, // Hauteur du bouton
+                        horizontal: 40,
+                        vertical: 15,
                       ),
                     ),
                     onPressed: () {},
@@ -106,36 +106,27 @@ class Screen2 extends StatelessWidget {
                 ),
               ),
             ),
-            // Flèche gauche pour revenir en arrière
+            // Flèches latérales
             Positioned(
               left: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
               child: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  size: 30,
-                  color: Colors.black54,
-                ),
+                icon: const Icon(Icons.arrow_back_ios,
+                    size: 30, color: Colors.black54),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
             ),
-            // Flèche droite pour avancer
             Positioned(
               right: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
               child: IconButton(
-                icon: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 30,
-                  color: Colors.black54,
-                ),
+                icon: const Icon(Icons.arrow_forward_ios,
+                    size: 30, color: Colors.black54),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const Screen3()), // Navigue vers Screen3
+                    MaterialPageRoute(builder: (context) => const Screen3()),
                   );
                 },
               ),

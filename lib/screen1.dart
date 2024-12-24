@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:terra_ciel/widgets/animated_logo.dart';
 import 'background/animated_background.dart';
 import 'screen2.dart';
 
@@ -12,27 +13,8 @@ class Screen1 extends StatelessWidget {
         useOrangeGradient: true, // Utilise le dégradé orangé spécifique
         child: Stack(
           children: [
-            // Logo avec rotation animée qui dépasse le haut de l'écran
-            Positioned(
-              top: -200,
-              left: 0,
-              right: 0,
-              child: TweenAnimationBuilder<double>(
-                tween: Tween<double>(begin: 0, end: 158),
-                duration: const Duration(milliseconds: 800),
-                builder: (context, angle, child) {
-                  return Transform.rotate(
-                    angle: angle * (3.141592653589793 / 180),
-                    child: Image.asset(
-                      'assets/logo.png',
-                      width: 400,
-                      height: 400,
-                      fit: BoxFit.contain,
-                    ),
-                  );
-                },
-              ),
-            ),
+            // Logo avec rotation animée
+            const AnimatedLogo(rotationAngle: 158),
             // Texte principal
             const Column(
               children: [
@@ -86,7 +68,7 @@ class Screen1 extends StatelessWidget {
               child: Container(
                 width: double.infinity, // Rectangle prend toute la largeur
                 decoration: const BoxDecoration(
-                  color: Color(0xFFFFF4E1), // Fond orange clair
+                  color: Color(0xFFFFF4E1),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(45),
                     topRight: Radius.circular(45),
@@ -103,13 +85,13 @@ class Screen1 extends StatelessWidget {
                 child: Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFFA500), // Orange vif
+                      backgroundColor: const Color(0xFFFFA500),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 40, // Largeur du bouton
-                        vertical: 15, // Hauteur du bouton
+                        horizontal: 40,
+                        vertical: 15,
                       ),
                     ),
                     onPressed: () {
@@ -130,29 +112,22 @@ class Screen1 extends StatelessWidget {
                 ),
               ),
             ),
-            // Flèche gauche désactivée et grisée
+            // Flèches latérales
             Positioned(
               left: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
-              child: const IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  size: 30,
-                  color: Colors.grey, // Couleur grisée
-                ),
-                onPressed: null, // Désactive le bouton
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_ios,
+                    size: 30, color: Colors.grey),
+                onPressed: null, // Flèche gauche désactivée
               ),
             ),
-            // Flèche droite pour avancer
             Positioned(
               right: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
               child: IconButton(
-                icon: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 30,
-                  color: Colors.black54,
-                ),
+                icon: const Icon(Icons.arrow_forward_ios,
+                    size: 30, color: Colors.black54),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const Screen2()),
