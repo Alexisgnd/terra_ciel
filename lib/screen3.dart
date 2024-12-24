@@ -17,7 +17,7 @@ class Screen3 extends StatelessWidget {
               left: 0,
               right: 0,
               child: Transform.rotate(
-                angle: 81.85 * (3.141592653589793 / 180), // Rotation à 81.85°
+                angle: 38 * (3.141592653589793 / 180), // Rotation à 38°
                 child: Image.asset(
                   'assets/logo.png',
                   width: 400,
