@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terra_ciel/pages/M%C3%A9t%C3%A9o/Classique/home_screen.dart';
+import 'package:terra_ciel/pages/M%C3%A9t%C3%A9o/Classique/meteo_classique.dart';
 import 'package:terra_ciel/widgets/animated_logo.dart';
 import '../background/animated_background.dart';
 
@@ -97,7 +97,7 @@ class Screen3 extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
+                          builder: (context) => const MeteoClassique(),
                         ),
                       );
                     },
