@@ -30,11 +30,11 @@ class NavBar extends StatelessWidget {
           _buildNavBarItem(
               Icons.home, "Accueil", 0, const Color(0xFF2D4379)), // Gris foncé
           _buildNavBarItem(Icons.wb_sunny, "Météo classique", 1,
-              const Color(0xFFFFD700)), // Jaune foncé
+              const Color(0xFFD4B500)), // Jaune foncé
           _buildNavBarItem(Icons.flight_takeoff, "Météo voyage", 2,
-              const Color(0xFF69BFFF)), // Bleu foncé
+              const Color(0xFF0086D4)), // Bleu foncé
           _buildNavBarItem(Icons.local_florist, "Météo plantes", 3,
-              const Color(0xFF4CAF50)), // Vert foncé
+              const Color(0xFF19D400)), // Vert foncé
         ],
       ),
     );
