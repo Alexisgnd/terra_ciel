@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'screen1.dart';
-import 'background/animated_background.dart';
+import '../background/animated_background.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

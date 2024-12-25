@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:terra_ciel/home_screen.dart';
 import 'package:terra_ciel/widgets/animated_logo.dart';
-import 'background/animated_background.dart';
+import '../background/animated_background.dart';
+import 'screen2.dart';
 
-class Screen3 extends StatelessWidget {
-  const Screen3({super.key});
+class Screen1 extends StatelessWidget {
+  const Screen1({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBackground(
-        useGreenGradient: true,
+        useOrangeGradient: true, // Utilise le dégradé orangé spécifique
         child: Stack(
           children: [
             // Logo avec rotation animée
-            const AnimatedLogo(rotationAngle: 38),
+            const AnimatedLogo(rotationAngle: 158),
             // Texte principal
             const Column(
               children: [
-                SizedBox(height: 250),
+                SizedBox(height: 250), // Décalage sous le logo
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Votre météo personnalisée",
+                    "Faites rayonner vos sorties !",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -36,7 +37,7 @@ class Screen3 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Recevez des prévisions météorologiques précises et personnalisées pour votre emplacement.",
+                    "Planifiez vos sorties en toute sérénité grâce à nos prévisions météorologiques précises et personnalisées.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -49,7 +50,7 @@ class Screen3 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Planifiez vos activités en toute confiance grâce à nos prévisions détaillées.",
+                    "Organisez vos pique-niques, sorties en famille ou escapades entre amis en toute confiance.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -66,9 +67,9 @@ class Screen3 extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                width: double.infinity,
+                width: double.infinity, // Rectangle prend toute la largeur
                 decoration: const BoxDecoration(
-                  color: Color(0xFFEBFFE7),
+                  color: Color(0xFFFFF4E1),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(45),
                     topRight: Radius.circular(45),
@@ -85,7 +86,7 @@ class Screen3 extends StatelessWidget {
                 child: Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF69FFB4),
+                      backgroundColor: const Color(0xFFFFA500),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -116,21 +117,22 @@ class Screen3 extends StatelessWidget {
             Positioned(
               left: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios,
-                    size: 30, color: Colors.black54),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+              child: const IconButton(
+                icon: Icon(Icons.arrow_back_ios, size: 30, color: Colors.grey),
+                onPressed: null, // Flèche gauche désactivée
               ),
             ),
             Positioned(
               right: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
-              child: const IconButton(
-                icon:
-                    Icon(Icons.arrow_forward_ios, size: 30, color: Colors.grey),
-                onPressed: null, // Flèche droite désactivée
+              child: IconButton(
+                icon: const Icon(Icons.arrow_forward_ios,
+                    size: 30, color: Colors.black54),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Screen2()),
+                  );
+                },
               ),
             ),
           ],
