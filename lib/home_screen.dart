@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:terra_ciel/widgets/navbar_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      // Redirection ou logique spécifique selon l'index
+      // Exemple :
+      // if (index == 1) Navigator.push(...);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    initializeDateFormatting('fr_FR', null);
     return Scaffold(
       backgroundColor: const Color(0xFFF4F9FF), // Couleur d'arrière-plan claire
       body: SafeArea(
@@ -55,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Today",
+                    "Aujourd'hui",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -63,9 +83,9 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "Wed, 7 Nov",
-                    style: TextStyle(
+                  Text(
+                    DateFormat('EEEE d MMMM y', 'fr_FR').format(DateTime.now()),
+                    style: const TextStyle(
                       fontSize: 18,
                       color: Color(0xFF7B8EA9),
                     ),
@@ -161,29 +181,10 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Barre de navigation
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 5,
-                    offset: Offset(0, -2),
-                  ),
-                ],
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildNavBarIcon(Icons.home, true),
-                  _buildNavBarIcon(Icons.cloud, false),
-                  _buildNavBarIcon(Icons.graphic_eq, false),
-                  _buildNavBarIcon(Icons.article_rounded, false),
-                  _buildNavBarIcon(Icons.help_outline, false),
-                ],
-              ),
+            // Barre de navigation séparée
+            NavBar(
+              selectedIndex: _selectedIndex,
+              onItemTapped: _onItemTapped,
             ),
           ],
         ),
@@ -243,15 +244,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  // Widget pour les icônes de la barre de navigation
-  Widget _buildNavBarIcon(IconData icon, bool isSelected) {
-    return Icon(
-      icon,
-      size: 28,
-      color: isSelected ? const Color(0xFF69BFFF) : const Color(0xFFB0C6DE),
     );
   }
 }
