@@ -117,13 +117,30 @@ class _MeteoClassiqueState extends State<MeteoClassique> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                children: _villes.map((ville) {
-                  return VilleCard(
-                    ville: ville["ville"],
-                    temperature: ville["temperature"],
-                    condition: ville["condition"],
-                  );
-                }).toList(),
+                children: [
+                  ..._villes.map((ville) {
+                    return VilleCard(
+                      ville: ville["ville"],
+                      temperature: ville["temperature"],
+                      condition: ville["condition"],
+                    );
+                  }),
+                  // Carte grise pour ajouter une ville
+                  GestureDetector(
+                    onTap: _ouvrirPopUpAjoutVille,
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 16),
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Center(
+                        child: Icon(Icons.add, size: 50, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 20),
