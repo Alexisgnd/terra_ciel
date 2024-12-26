@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:terra_ciel/pages/M%C3%A9t%C3%A9o/Classique/meteo_classique.dart';
+import 'package:terra_ciel/pages/meteo_classique.dart';
 import 'package:terra_ciel/widgets/animated_logo.dart';
-import '../background/animated_background.dart';
-import 'screen3.dart';
+import '../../background/animated_background.dart';
 
-class Screen2 extends StatelessWidget {
-  const Screen2({super.key});
+class Screen3 extends StatelessWidget {
+  const Screen3({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBackground(
-        useBlueGradient: true,
+        useGreenGradient: true,
         child: Stack(
           children: [
             // Logo avec rotation animée
-            const AnimatedLogo(rotationAngle: 277),
+            const AnimatedLogo(rotationAngle: 38),
             // Texte principal
             const Column(
               children: [
@@ -23,7 +22,7 @@ class Screen2 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Marre du temps qui gâche vos vacances ?",
+                    "Votre météo personnalisée",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -37,7 +36,7 @@ class Screen2 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Choisissez la destination et la période idéale pour vos vacances avec notre fonction Météo de Voyage.",
+                    "Recevez des prévisions météorologiques précises et personnalisées pour votre emplacement.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -50,7 +49,7 @@ class Screen2 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Découvrez quand visiter Paris pour profiter de ses beaux jours ou Bali pour éviter la saison des pluies.",
+                    "Planifiez vos activités en toute confiance grâce à nos prévisions détaillées.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -69,7 +68,7 @@ class Screen2 extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE7F3FF),
+                  color: Color(0xFFEBFFE7),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(45),
                     topRight: Radius.circular(45),
@@ -86,7 +85,7 @@ class Screen2 extends StatelessWidget {
                 child: Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF69BFFF),
+                      backgroundColor: const Color(0xFF69FFB4),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -103,7 +102,7 @@ class Screen2 extends StatelessWidget {
                       );
                     },
                     child: const Text(
-                      "Explorer →",
+                      "Découvrir →",
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 18,
@@ -128,14 +127,10 @@ class Screen2 extends StatelessWidget {
             Positioned(
               right: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios,
-                    size: 30, color: Colors.black54),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Screen3()),
-                  );
-                },
+              child: const IconButton(
+                icon:
+                    Icon(Icons.arrow_forward_ios, size: 30, color: Colors.grey),
+                onPressed: null, // Flèche droite désactivée
               ),
             ),
           ],

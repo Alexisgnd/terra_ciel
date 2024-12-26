@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screen1.dart';
-import 'screen2.dart';
-import 'screen3.dart';
+import 'screens/screen1.dart';
+import 'screens/screen2.dart';
+import 'screens/screen3.dart';
 
 class FeaturesScreen extends StatefulWidget {
   const FeaturesScreen({super.key});
