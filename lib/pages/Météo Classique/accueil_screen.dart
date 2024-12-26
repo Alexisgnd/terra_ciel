@@ -8,14 +8,14 @@ import 'package:terra_ciel/widgets/ajout_ville_popup.dart';
 import 'package:terra_ciel/widgets/hamburger_menu.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class MeteoClassique extends StatefulWidget {
-  const MeteoClassique({super.key});
+class AccueilScreen extends StatefulWidget {
+  const AccueilScreen({super.key});
 
   @override
-  _MeteoClassiqueState createState() => _MeteoClassiqueState();
+  _AccueilScreenState createState() => _AccueilScreenState();
 }
 
-class _MeteoClassiqueState extends State<MeteoClassique> {
+class _AccueilScreenState extends State<AccueilScreen> {
   int _selectedIndex = 0;
   List<Map<String, dynamic>> _villes = [];
 
@@ -26,17 +26,16 @@ class _MeteoClassiqueState extends State<MeteoClassique> {
   }
 
   Future<void> _loadVilles() async {
-  final String response = await rootBundle.loadString('assets/data.json');
-  final data = await json.decode(response);
-  setState(() {
-    _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
-  });
-}
+    final String response = await rootBundle.loadString('assets/data.json');
+    final data = await json.decode(response);
+    setState(() {
+      _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
+    });
+  }
 
   void _ajouterVille(String ville, int temperature, String condition) {
     setState(() {
-      _villes.add(
-          {"ville": ville, "temperature": temperature, "condition": condition});
+      _villes.add({"ville": ville, "temperature": temperature, "condition": condition});
     });
   }
 
@@ -83,8 +82,7 @@ class _MeteoClassiqueState extends State<MeteoClassique> {
                   Builder(
                     builder: (context) {
                       return IconButton(
-                        icon: const Icon(Icons.menu,
-                            size: 28, color: Color(0xFF2D4379)),
+                        icon: const Icon(Icons.menu, size: 28, color: Color(0xFF2D4379)),
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
