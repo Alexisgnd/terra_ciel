@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -5,6 +6,7 @@ import 'package:terra_ciel/widgets/navbar_widget.dart';
 import 'package:terra_ciel/widgets/ville_card.dart';
 import 'package:terra_ciel/widgets/ajout_ville_popup.dart';
 import 'package:terra_ciel/widgets/hamburger_menu.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class MeteoClassique extends StatefulWidget {
   const MeteoClassique({super.key});
@@ -15,11 +17,21 @@ class MeteoClassique extends StatefulWidget {
 
 class _MeteoClassiqueState extends State<MeteoClassique> {
   int _selectedIndex = 0;
-  final List<Map<String, dynamic>> _villes = [
-    {"ville": "Madiun", "temperature": 25, "condition": "Mostly Sunny"},
-    {"ville": "Paris", "temperature": 18, "condition": "Cloudy"},
-    {"ville": "New York", "temperature": 22, "condition": "Rainy"},
-  ];
+  List<Map<String, dynamic>> _villes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadVilles();
+  }
+
+  Future<void> _loadVilles() async {
+  final String response = await rootBundle.loadString('assets/data.json');
+  final data = await json.decode(response);
+  setState(() {
+    _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
+  });
+}
 
   void _ajouterVille(String ville, int temperature, String condition) {
     setState(() {
