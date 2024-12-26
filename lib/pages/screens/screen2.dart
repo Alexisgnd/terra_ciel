@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:terra_ciel/pages/M%C3%A9t%C3%A9o%20Classique/accueil_screen.dart';
 import 'package:terra_ciel/widgets/animated_logo.dart';
-import '../../background/animated_background.dart';
+import 'package:terra_ciel/background/animated_background.dart';
 import 'screen3.dart';
+import 'package:terra_ciel/pages/Météo Classique/meteo_classique_home.dart';
 
 class Screen2 extends StatelessWidget {
   const Screen2({super.key});
@@ -14,9 +14,8 @@ class Screen2 extends StatelessWidget {
         useBlueGradient: true,
         child: Stack(
           children: [
-            // Logo avec rotation animée
             const AnimatedLogo(rotationAngle: 277),
-            // Texte principal
+
             const Column(
               children: [
                 SizedBox(height: 250),
@@ -37,7 +36,7 @@ class Screen2 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Choisissez la destination et la période idéale pour vos vacances avec notre fonction Météo de Voyage.",
+                    "Choisissez la destination et la période idéale...",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -50,7 +49,7 @@ class Screen2 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Découvrez quand visiter Paris pour profiter de ses beaux jours ou Bali pour éviter la saison des pluies.",
+                    "Découvrez quand visiter Paris...",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -61,7 +60,7 @@ class Screen2 extends StatelessWidget {
                 ),
               ],
             ),
-            // Rectangle avec le bouton
+
             Positioned(
               bottom: 0,
               left: 0,
@@ -96,9 +95,10 @@ class Screen2 extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+                      // Aller directement à la Météo Classique
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const AccueilScreen(),
+                          builder: (context) => const MeteoClassiqueHome(),
                         ),
                       );
                     },
@@ -113,7 +113,8 @@ class Screen2 extends StatelessWidget {
                 ),
               ),
             ),
-            // Flèches latérales
+
+            // Flèches
             Positioned(
               left: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,

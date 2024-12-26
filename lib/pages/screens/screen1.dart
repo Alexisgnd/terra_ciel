@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:terra_ciel/pages/M%C3%A9t%C3%A9o%20Classique/accueil_screen.dart';
 import 'package:terra_ciel/widgets/animated_logo.dart';
-import '../../background/animated_background.dart';
+import 'package:terra_ciel/background/animated_background.dart';
 import 'screen2.dart';
+import 'package:terra_ciel/pages/Météo Classique/meteo_classique_home.dart';
 
 class Screen1 extends StatelessWidget {
   const Screen1({super.key});
@@ -11,15 +11,16 @@ class Screen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBackground(
-        useOrangeGradient: true, // Utilise le dégradé orangé spécifique
+        useOrangeGradient: true,
         child: Stack(
           children: [
-            // Logo avec rotation animée
+            // Logo
             const AnimatedLogo(rotationAngle: 158),
-            // Texte principal
+
+            // Contenu principal
             const Column(
               children: [
-                SizedBox(height: 250), // Décalage sous le logo
+                SizedBox(height: 250),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
@@ -37,7 +38,7 @@ class Screen1 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Planifiez vos sorties en toute sérénité grâce à nos prévisions météorologiques précises et personnalisées.",
+                    "Planifiez vos sorties en toute sérénité...",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -50,7 +51,7 @@ class Screen1 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Organisez vos pique-niques, sorties en famille ou escapades entre amis en toute confiance.",
+                    "Organisez vos pique-niques...",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -61,13 +62,14 @@ class Screen1 extends StatelessWidget {
                 ),
               ],
             ),
-            // Rectangle avec le bouton
+
+            // Rectangle + Bouton
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
               child: Container(
-                width: double.infinity, // Rectangle prend toute la largeur
+                width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Color(0xFFFFF4E1),
                   borderRadius: BorderRadius.only(
@@ -96,9 +98,10 @@ class Screen1 extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+                      // Aller vers la Météo Classique
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const AccueilScreen(),
+                          builder: (context) => const MeteoClassiqueHome(),
                         ),
                       );
                     },
@@ -113,13 +116,14 @@ class Screen1 extends StatelessWidget {
                 ),
               ),
             ),
+
             // Flèches latérales
             Positioned(
               left: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
               child: const IconButton(
                 icon: Icon(Icons.arrow_back_ios, size: 30, color: Colors.grey),
-                onPressed: null, // Flèche gauche désactivée
+                onPressed: null, // Désactivée sur ce premier écran
               ),
             ),
             Positioned(

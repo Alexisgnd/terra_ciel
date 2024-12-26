@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:terra_ciel/pages/M%C3%A9t%C3%A9o%20Classique/accueil_screen.dart';
 import 'package:terra_ciel/widgets/animated_logo.dart';
-import '../../background/animated_background.dart';
+import 'package:terra_ciel/background/animated_background.dart';
+import 'package:terra_ciel/pages/Météo Classique/meteo_classique_home.dart';
 
 class Screen3 extends StatelessWidget {
   const Screen3({super.key});
@@ -13,9 +13,8 @@ class Screen3 extends StatelessWidget {
         useGreenGradient: true,
         child: Stack(
           children: [
-            // Logo avec rotation animée
             const AnimatedLogo(rotationAngle: 38),
-            // Texte principal
+
             const Column(
               children: [
                 SizedBox(height: 250),
@@ -36,7 +35,7 @@ class Screen3 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Recevez des prévisions météorologiques précises et personnalisées pour votre emplacement.",
+                    "Recevez des prévisions météorologiques précises...",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -49,7 +48,7 @@ class Screen3 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Planifiez vos activités en toute confiance grâce à nos prévisions détaillées.",
+                    "Planifiez vos activités en toute confiance...",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -60,7 +59,7 @@ class Screen3 extends StatelessWidget {
                 ),
               ],
             ),
-            // Rectangle avec le bouton
+
             Positioned(
               bottom: 0,
               left: 0,
@@ -95,9 +94,10 @@ class Screen3 extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+                      // Aller vers la Météo Classique
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const AccueilScreen(),
+                          builder: (context) => const MeteoClassiqueHome(),
                         ),
                       );
                     },
@@ -112,7 +112,8 @@ class Screen3 extends StatelessWidget {
                 ),
               ),
             ),
-            // Flèches latérales
+
+            // Flèches
             Positioned(
               left: 10,
               top: MediaQuery.of(context).size.height / 2 - 30,
@@ -130,7 +131,7 @@ class Screen3 extends StatelessWidget {
               child: const IconButton(
                 icon:
                     Icon(Icons.arrow_forward_ios, size: 30, color: Colors.grey),
-                onPressed: null, // Flèche droite désactivée
+                onPressed: null, // Désactivée ici
               ),
             ),
           ],
