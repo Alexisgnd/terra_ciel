@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:terra_ciel/widgets/navbar_widget.dart';
 import 'package:terra_ciel/widgets/ville_card.dart';
 import 'package:terra_ciel/widgets/ajout_ville_popup.dart';
+import 'package:terra_ciel/widgets/hamburger_menu.dart';
 
 class MeteoClassique extends StatefulWidget {
   const MeteoClassique({super.key});
@@ -45,6 +46,7 @@ class _MeteoClassiqueState extends State<MeteoClassique> {
     initializeDateFormatting('fr_FR', null);
     return Scaffold(
       backgroundColor: const Color(0xFFF4F9FF),
+      drawer: const HamburgerMenu(),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +55,7 @@ class _MeteoClassiqueState extends State<MeteoClassique> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Color(0xFFE6E6E6), // Couleur légèrement différente
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
@@ -66,18 +68,22 @@ class _MeteoClassiqueState extends State<MeteoClassique> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Menu hamburger
-                  IconButton(
-                    icon: const Icon(Icons.menu,
-                        size: 28, color: Color(0xFF2D4379)),
-                    onPressed: () {
-                      // Action pour le menu
+                  Builder(
+                    builder: (context) {
+                      return IconButton(
+                        icon: const Icon(Icons.menu,
+                            size: 28, color: Color(0xFF2D4379)),
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                      );
                     },
                   ),
                   // Photo de profil ronde
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 20,
-                    backgroundColor: Colors.grey[300], // Placeholder gris
-                    child: const Icon(
+                    backgroundColor: Color(0xFFA6A6A6), // Placeholder gris
+                    child: Icon(
                       Icons.person,
                       size: 24,
                       color: Colors.white,

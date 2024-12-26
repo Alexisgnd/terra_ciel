@@ -27,18 +27,13 @@ class NavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavBarItem(
-              Icons.home, "Accueil", 0, const Color(0xFF2D4379)), // Gris foncé
-          _buildNavBarItem(Icons.wb_sunny, "Météo classique", 1,
-              const Color(0xFFD4B500)), // Jaune foncé
-          _buildNavBarItem(Icons.flight_takeoff, "Météo voyage", 2,
-              const Color(0xFF0086D4)), // Bleu foncé
-          _buildNavBarItem(Icons.local_florist, "Météo plantes", 3,
-              const Color(0xFF19D400)), // Vert foncé
+          _buildNavBarItem(Icons.home, "Accueil", 0, const Color(0xFF2D4379)), // Bleu foncé
+          _buildNavBarItem(Icons.location_city, "Villes", 1, const Color(0xFF4A90E2)), // Bleu moyen
+          _buildNavBarItem(Icons.settings, "Préférences", 2, const Color(0xFF0086D4)), // Bleu clair
         ],
-      ),
-    );
-  }
+            ),
+          );
+        }
 
   Widget _buildNavBarItem(
       IconData icon, String label, int index, Color activeColor) {
