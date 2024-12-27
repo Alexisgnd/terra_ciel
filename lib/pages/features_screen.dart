@@ -7,10 +7,10 @@ class FeaturesScreen extends StatefulWidget {
   const FeaturesScreen({super.key});
 
   @override
-  _FeaturesScreenState createState() => _FeaturesScreenState();
+  FeaturesScreenState createState() => FeaturesScreenState();
 }
 
-class _FeaturesScreenState extends State<FeaturesScreen> {
+class FeaturesScreenState extends State<FeaturesScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -19,7 +19,7 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // PageView pour afficher les écrans
+          // PageView
           PageView(
             controller: _pageController,
             onPageChanged: (int page) {
@@ -33,6 +33,8 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
               Screen3(),
             ],
           ),
+
+          // Indicateurs
           Positioned(
             bottom: 20,
             left: 0,

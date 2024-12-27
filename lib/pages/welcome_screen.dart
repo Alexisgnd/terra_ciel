@@ -7,14 +7,14 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Navigation automatique après 8 secondes
+    // Navigation automatique après 8 secondes vers Screen1
     Timer(const Duration(seconds: 8), () {
       Navigator.pushReplacement(
         context,

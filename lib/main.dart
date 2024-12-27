@@ -22,10 +22,10 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
+class SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
 
-    // Animation de rotation (de 360° à 0°)
+    // Animation de rotation (360° -> 0°)
     _rotationAnimation = Tween<double>(begin: 2 * 3.1415926, end: 0.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen>
     // Lancer l'animation
     _controller.forward();
 
-    // Navigation vers HomePage après l'animation
+    // Navigation vers HomePage après ~8 secondes
     Timer(const Duration(seconds: 8), () {
       Navigator.pushReplacement(
         context,
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo animé (agrandissement + rotation)
+            // Logo animé
             AnimatedBuilder(
               animation: _controller,
               builder: (context, child) {
@@ -104,7 +104,7 @@ class _SplashScreenState extends State<SplashScreen>
             ),
             const SizedBox(height: 30),
 
-            // Animation du titre "TerraCiel"
+            // Titre
             SlideTransition(
               position: _slideTextAnimation,
               child: FadeTransition(
@@ -121,7 +121,7 @@ class _SplashScreenState extends State<SplashScreen>
             ),
             const SizedBox(height: 15),
 
-            // Animation du sous-titre avec effet de scale-up
+            // Sous-titre
             ScaleTransition(
               scale: _fadeTextAnimation,
               child: const Text(

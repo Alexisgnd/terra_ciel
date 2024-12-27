@@ -2,21 +2,19 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:terra_ciel/widgets/navbar_widget.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
 import 'package:terra_ciel/widgets/ville_card.dart';
 import 'package:terra_ciel/widgets/ajout_ville_popup.dart';
-import 'package:terra_ciel/widgets/hamburger_menu.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 class AccueilScreen extends StatefulWidget {
   const AccueilScreen({super.key});
 
   @override
-  _AccueilScreenState createState() => _AccueilScreenState();
+  AccueilScreenState createState() => AccueilScreenState();
 }
 
-class _AccueilScreenState extends State<AccueilScreen> {
-  int _selectedIndex = 0;
+class AccueilScreenState extends State<AccueilScreen> {
   List<Map<String, dynamic>> _villes = [];
 
   @override
@@ -35,38 +33,39 @@ class _AccueilScreenState extends State<AccueilScreen> {
 
   void _ajouterVille(String ville, int temperature, String condition) {
     setState(() {
-      _villes.add({"ville": ville, "temperature": temperature, "condition": condition});
-    });
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
+      _villes.add({
+        "ville": ville,
+        "temperature": temperature,
+        "condition": condition,
+      });
     });
   }
 
   void _ouvrirPopUpAjoutVille() {
     showDialog(
       context: context,
-      builder: (context) => AjoutVillePopUp(onVilleAdded: _ajouterVille),
+      builder: (context) => AjoutVillePopUp(
+        onVilleAdded: _ajouterVille,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('fr_FR', null);
+
     return Scaffold(
+      // Le drawer peut être géré directement dans meteo_classique_home.dart
       backgroundColor: const Color(0xFFF4F9FF),
-      drawer: const HamburgerMenu(),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header avec le menu hamburger et la photo de profil
+            // Header
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6E6E6), // Couleur légèrement différente
+                color: Color(0xFFE6E6E6),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
@@ -78,21 +77,22 @@ class _AccueilScreenState extends State<AccueilScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Menu hamburger
+                  // Menu hamburger (ou icône) :
                   Builder(
                     builder: (context) {
                       return IconButton(
-                        icon: const Icon(Icons.menu, size: 28, color: Color(0xFF2D4379)),
+                        icon: const Icon(Icons.menu,
+                            size: 28, color: Color(0xFF2D4379)),
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
                       );
                     },
                   ),
-                  // Photo de profil ronde
+                  // Avatar
                   const CircleAvatar(
                     radius: 20,
-                    backgroundColor: Color(0xFFA6A6A6), // Placeholder gris
+                    backgroundColor: Color(0xFFA6A6A6),
                     child: Icon(
                       Icons.person,
                       size: 24,
@@ -102,7 +102,8 @@ class _AccueilScreenState extends State<AccueilScreen> {
                 ],
               ),
             ),
-            // Section "Aujourd'hui" et date
+
+            // Texte "Aujourd'hui" + date
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -128,7 +129,8 @@ class _AccueilScreenState extends State<AccueilScreen> {
                 ],
               ),
             ),
-            // Slider des villes
+
+            // Slider horizontal
             Expanded(
               child: ListView(
                 scrollDirection: Axis.horizontal,
@@ -141,7 +143,6 @@ class _AccueilScreenState extends State<AccueilScreen> {
                       condition: ville["condition"],
                     );
                   }),
-                  // Carte grise pour ajouter une ville
                   GestureDetector(
                     onTap: _ouvrirPopUpAjoutVille,
                     child: Container(
@@ -160,12 +161,6 @@ class _AccueilScreenState extends State<AccueilScreen> {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Barre de navigation
-            NavBar(
-              selectedIndex: _selectedIndex,
-              onItemTapped: _onItemTapped,
-            ),
           ],
         ),
       ),
