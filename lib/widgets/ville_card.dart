@@ -4,12 +4,18 @@ class VilleCard extends StatelessWidget {
   final String ville;
   final int temperature;
   final String condition;
+  final int humidity;
+  final double windSpeed;
+  final String description;
 
   const VilleCard({
     super.key,
     required this.ville,
     required this.temperature,
     required this.condition,
+    required this.humidity,
+    required this.windSpeed,
+    required this.description,
   });
 
   @override
@@ -49,6 +55,30 @@ class VilleCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             condition,
+            style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white70,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            "Humidité: $humidity%",
+            style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white70,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            "Vent: $windSpeed km/h",
+            style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white70,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            description,
             style: const TextStyle(
               fontSize: 18,
               color: Colors.white70,

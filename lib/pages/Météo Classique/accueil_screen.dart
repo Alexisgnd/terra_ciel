@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -26,39 +27,69 @@ class AccueilScreenState extends State<AccueilScreen> {
   }
 
   Future<void> _loadVilles() async {
-    final String response = await rootBundle.loadString('assets/data.json');
-    final data = await json.decode(response);
-    setState(() {
-      _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
-    });
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final path = directory.path;
+      final file = File('$path/data.json');
+
+      if (await file.exists()) {
+        final String response = await file.readAsString();
+        final data = await json.decode(response);
+        setState(() {
+          _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
+        });
+      } else {
+        // Load initial data from assets if file does not exist
+        final String response = await rootBundle.loadString('assets/data.json');
+        final data = await json.decode(response);
+        setState(() {
+          _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
+        });
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 
-  Future<void> _ajouterVille(String ville, int temperature, String condition) async {
+  Future<void> _ajouterVille(String ville, int temperature, String condition,
+      {int humidity = 80,
+      int windSpeed = 10,
+      String description = 'Aucun détail'}) async {
     setState(() {
       _villes.add({
         "ville": ville,
         "temperature": temperature,
         "condition": condition,
+        "humidity": humidity,
+        "windSpeed": windSpeed,
+        "description": description,
       });
     });
 
-    // Get the path to the app's documents directory
     final directory = await getApplicationDocumentsDirectory();
     final path = directory.path;
     final file = File('$path/data.json');
-
-    // Read the current data from the file
+    if (!await file.exists()) {
+      await file.writeAsString(json.encode({
+        "villes_ajoutees": [],
+        "villes_favorites": [],
+        "preferences": {"theme": "light"}
+      }));
+    }
     final String currentData = await file.readAsString();
     final data = json.decode(currentData);
 
-    // Add the new city to the data
     data['villes_ajoutees'].add({
       "ville": ville,
       "temperature": temperature,
       "condition": condition,
+      "humidity": humidity,
+      "windSpeed": windSpeed,
+      "description": description,
     });
 
-    // Write the updated data back to the file
     await file.writeAsString(json.encode(data));
   }
 
@@ -117,11 +148,16 @@ class AccueilScreenState extends State<AccueilScreen> {
                   // Affiche les cartes de villes
                   ..._villes.map((ville) {
                     return VilleCard(
-                      ville: ville["ville"],
-                      temperature: ville["temperature"],
-                      condition: ville["condition"],
+                      ville: ville["ville"] ?? "Inconnue",
+                      temperature: ville["temperature"] ?? 0,
+                      condition: ville["condition"] ?? "Inconnue",
+                      humidity: ville["humidity"] ?? 0,
+                      windSpeed: (ville["windSpeed"] != null)
+                          ? double.parse(ville["windSpeed"].toString())
+                          : 0.0,
+                      description: ville["description"] ?? "Pas de description",
                     );
-                  }).toList(),
+                  }),
                   // Carte pour ajouter une nouvelle ville
                   GestureDetector(
                     onTap: _ouvrirPopUpAjoutVille,
