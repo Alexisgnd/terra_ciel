@@ -1,6 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:terra_ciel/widgets/ajout_ville_popup.dart';
 
@@ -21,84 +23,117 @@ class VillesScreenState extends State<VillesScreen> {
   }
 
   Future<void> _loadVilles() async {
-    final String response = await rootBundle.loadString('assets/data.json');
-    final data = await json.decode(response);
-    setState(() {
-      _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
-    });
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final file = File('${directory.path}/data.json');
+      if (await file.exists()) {
+        final String response = await file.readAsString();
+        final data = json.decode(response);
+        setState(() {
+          _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
+        });
+      } else {
+        final String response = await rootBundle.loadString('assets/data.json');
+        final data = json.decode(response);
+        setState(() {
+          _villes = List<Map<String, dynamic>>.from(data['villes_ajoutees']);
+        });
+      }
+    } catch (_) {
+      setState(() => _villes = []);
+    }
   }
 
-  void _ajouterVille(String ville, int temperature, String condition) {
-    setState(() {
-      _villes.add(
-          {"ville": ville, "temperature": temperature, "condition": condition});
-    });
+  Future<void> _saveVilles() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/data.json');
+
+    if (!await file.exists()) {
+      await file.writeAsString(json.encode({
+        "villes_ajoutees": [],
+        "villes_favorites": [],
+        "preferences": {"theme": "light"}
+      }));
+    }
+
+    final data = {
+      "villes_ajoutees": _villes,
+      "villes_favorites": [],
+      "preferences": {"theme": "light"}
+    };
+    await file.writeAsString(json.encode(data));
   }
 
-  void _supprimerVille(int index) {
+  Future<void> _ajouterVille(String ville, int temperature, String condition) async {
+    setState(() {
+      _villes.add({
+        "ville": ville,
+        "temperature": temperature,
+        "condition": condition,
+      });
+    });
+    await _saveVilles();
+  }
+
+  Future<void> _supprimerVille(int index) async {
     setState(() {
       _villes.removeAt(index);
     });
+    await _saveVilles();
+  }
+
+  Future<void> _reorderVilles(int oldIndex, int newIndex) async {
+    if (newIndex > oldIndex) newIndex--;
+    setState(() {
+      final item = _villes.removeAt(oldIndex);
+      _villes.insert(newIndex, item);
+    });
+    await _saveVilles();
   }
 
   void _ouvrirPopUpAjoutVille() {
     showDialog(
       context: context,
-      builder: (context) => AjoutVillePopUp(onVilleAdded: _ajouterVille),
+      builder: (context) => AjoutVillePopUp(
+        onVilleAdded: (ville, temperature, condition) =>
+            _ajouterVille(ville, temperature, condition),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F9FF),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 50.0), // Décale les villes vers le bas
-              child: ReorderableListView(
-                onReorder: (oldIndex, newIndex) {
-                  setState(() {
-                    if (newIndex > oldIndex) {
-                      newIndex -= 1;
-                    }
-                    final item = _villes.removeAt(oldIndex);
-                    _villes.insert(newIndex, item);
-                  });
-                },
-                children: [
-                  for (int index = 0; index < _villes.length; index++)
-                    Dismissible(
-                      key: ValueKey(_villes[index]),
-                      onDismissed: (direction) {
-                        _supprimerVille(index);
-                      },
-                      background: Container(color: Colors.red),
-                      child: ListTile(
-                        title: Text(_villes[index]['ville']),
-                        subtitle: Text(
-                          "${_villes[index]['temperature']}°, "
-                          "${_villes[index]['condition']}",
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 10,
-              right: 10,
-              child: ElevatedButton(
-                onPressed: _ouvrirPopUpAjoutVille,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, // Thon bleuté color
+      body: Stack(
+        children: [
+          ReorderableListView(
+            onReorder: _reorderVilles,
+            children: [
+              for (int i = 0; i < _villes.length; i++)
+                ListTile(
+                  key: ValueKey(_villes[i]),
+                  title: Text(_villes[i]["ville"] ?? "Inconnue"),
+                  subtitle: Text(
+                    "Temp: ${_villes[i]["temperature"] ?? 0}°, "
+                    "Cond: ${_villes[i]["condition"] ?? "Inconnue"}",
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.red),
+                    onPressed: () => _supprimerVille(i),
+                  ),
                 ),
-                child: const Text('+ Ajouter'),
-              ),
+            ],
+          ),
+          Positioned(
+            bottom: 10,
+            right: 10,
+            child: ElevatedButton(
+              onPressed: _ouvrirPopUpAjoutVille,
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+              child: const Text('+ Ajouter'),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
