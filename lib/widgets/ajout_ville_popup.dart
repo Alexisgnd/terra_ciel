@@ -6,10 +6,10 @@ class AjoutVillePopUp extends StatefulWidget {
   const AjoutVillePopUp({super.key, required this.onVilleAdded});
 
   @override
-  _AjoutVillePopUpState createState() => _AjoutVillePopUpState();
+  AjoutVillePopUpState createState() => AjoutVillePopUpState();
 }
 
-class _AjoutVillePopUpState extends State<AjoutVillePopUp> {
+class AjoutVillePopUpState extends State<AjoutVillePopUp> {
   final TextEditingController _searchController = TextEditingController();
   final List<Map<String, dynamic>> _suggestions = [
     {"ville": "London", "temperature": 15, "condition": "Cloudy"},
@@ -28,8 +28,7 @@ class _AjoutVillePopUpState extends State<AjoutVillePopUp> {
   void _filtrerSuggestions(String query) {
     setState(() {
       _filteredSuggestions = _suggestions
-          .where((ville) =>
-              ville["ville"].toLowerCase().contains(query.toLowerCase()))
+          .where((v) => v["ville"].toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }
@@ -51,7 +50,7 @@ class _AjoutVillePopUpState extends State<AjoutVillePopUp> {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            height: 200, // Hauteur fixe pour éviter les exceptions
+            height: 200,
             child: ListView(
               children: _filteredSuggestions.map((ville) {
                 return ListTile(

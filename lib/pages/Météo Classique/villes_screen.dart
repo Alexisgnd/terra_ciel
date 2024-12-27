@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:terra_ciel/widgets/ajout_ville_popup.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
+
+import 'package:terra_ciel/widgets/ajout_ville_popup.dart';
 
 class VillesScreen extends StatefulWidget {
   const VillesScreen({super.key});
 
   @override
-  _VillesScreenState createState() => _VillesScreenState();
+  VillesScreenState createState() => VillesScreenState();
 }
 
-class _VillesScreenState extends State<VillesScreen> {
+class VillesScreenState extends State<VillesScreen> {
   List<Map<String, dynamic>> _villes = [];
 
   @override
@@ -29,7 +30,8 @@ class _VillesScreenState extends State<VillesScreen> {
 
   void _ajouterVille(String ville, int temperature, String condition) {
     setState(() {
-      _villes.add({"ville": ville, "temperature": temperature, "condition": condition});
+      _villes.add(
+          {"ville": ville, "temperature": temperature, "condition": condition});
     });
   }
 
@@ -80,7 +82,10 @@ class _VillesScreenState extends State<VillesScreen> {
                 background: Container(color: Colors.red),
                 child: ListTile(
                   title: Text(_villes[index]['ville']),
-                  subtitle: Text("${_villes[index]['temperature']}°, ${_villes[index]['condition']}"),
+                  subtitle: Text(
+                    "${_villes[index]['temperature']}°, "
+                    "${_villes[index]['condition']}",
+                  ),
                 ),
               ),
           ],

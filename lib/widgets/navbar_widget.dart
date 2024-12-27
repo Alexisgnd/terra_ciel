@@ -27,16 +27,22 @@ class NavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavBarItem(Icons.home, "Accueil", 0, const Color(0xFF2D4379)), // Bleu foncé
-          _buildNavBarItem(Icons.location_city, "Villes", 1, const Color(0xFF4A90E2)), // Bleu moyen
-          _buildNavBarItem(Icons.settings, "Préférences", 2, const Color(0xFF0086D4)), // Bleu clair
+          _buildNavBarItem(Icons.home, "Accueil", 0, const Color(0xFF2D4379)),
+          _buildNavBarItem(
+              Icons.location_city, "Villes", 1, const Color(0xFF4A90E2)),
+          _buildNavBarItem(
+              Icons.settings, "Préférences", 2, const Color(0xFF0086D4)),
         ],
-            ),
-          );
-        }
+      ),
+    );
+  }
 
   Widget _buildNavBarItem(
-      IconData icon, String label, int index, Color activeColor) {
+    IconData icon,
+    String label,
+    int index,
+    Color activeColor,
+  ) {
     return GestureDetector(
       onTap: () => onItemTapped(index),
       child: Column(
