@@ -54,56 +54,13 @@ class AccueilScreenState extends State<AccueilScreen> {
   Widget build(BuildContext context) {
     initializeDateFormatting('fr_FR', null);
 
-    return Scaffold(
-      // Le drawer peut être géré directement dans meteo_classique_home.dart
-      backgroundColor: const Color(0xFFF4F9FF),
-      body: SafeArea(
+    return Container(
+      color: const Color(0xFFF4F9FF),
+      child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              decoration: const BoxDecoration(
-                color: Color(0xFFE6E6E6),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Menu hamburger (ou icône) :
-                  Builder(
-                    builder: (context) {
-                      return IconButton(
-                        icon: const Icon(Icons.menu,
-                            size: 28, color: Color(0xFF2D4379)),
-                        onPressed: () {
-                          Scaffold.of(context).openDrawer();
-                        },
-                      );
-                    },
-                  ),
-                  // Avatar
-                  const CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Color(0xFFA6A6A6),
-                    child: Icon(
-                      Icons.person,
-                      size: 24,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Texte "Aujourd'hui" + date
+            // Titre "Aujourd'hui" + date
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -130,19 +87,21 @@ class AccueilScreenState extends State<AccueilScreen> {
               ),
             ),
 
-            // Slider horizontal
+            // Slider horizontal des villes
             Expanded(
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 children: [
+                  // Affiche les cartes de villes
                   ..._villes.map((ville) {
                     return VilleCard(
                       ville: ville["ville"],
                       temperature: ville["temperature"],
                       condition: ville["condition"],
                     );
-                  }),
+                  }).toList(),
+                  // Carte pour ajouter une nouvelle ville
                   GestureDetector(
                     onTap: _ouvrirPopUpAjoutVille,
                     child: Container(

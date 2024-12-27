@@ -36,45 +36,44 @@ class AjoutVillePopUpState extends State<AjoutVillePopUp> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Ajouter une ville"),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: _searchController,
-            onChanged: _filtrerSuggestions,
-            decoration: const InputDecoration(
-              labelText: "Rechercher une ville",
-              border: OutlineInputBorder(),
+      title: const Text('Ajouter une ville'),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _searchController,
+              decoration: const InputDecoration(
+                labelText: 'Rechercher une ville',
+              ),
+              onChanged: _filtrerSuggestions,
             ),
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: 200,
-            child: ListView(
-              children: _filteredSuggestions.map((ville) {
-                return ListTile(
-                  title: Text(ville["ville"]),
-                  subtitle:
-                      Text("${ville["temperature"]}°, ${ville["condition"]}"),
-                  onTap: () {
-                    widget.onVilleAdded(
-                      ville["ville"],
-                      ville["temperature"],
-                      ville["condition"],
-                    );
-                    Navigator.of(context).pop();
-                  },
-                );
-              }).toList(),
-            ),
-          ),
-        ],
+            const SizedBox(height: 10),
+            ..._filteredSuggestions.map((suggestion) {
+              return ListTile(
+                title: Text(suggestion['ville']),
+                subtitle: Text(
+                  "${suggestion['temperature']}°, ${suggestion['condition']}",
+                ),
+                onTap: () {
+                  widget.onVilleAdded(
+                    suggestion['ville'],
+                    suggestion['temperature'],
+                    suggestion['condition'],
+                  );
+                  Navigator.of(context).pop();
+                },
+              );
+            }).toList(),
+          ],
+        ),
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: const Text("Annuler"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Annuler'),
         ),
       ],
     );

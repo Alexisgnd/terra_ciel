@@ -52,42 +52,51 @@ class VillesScreenState extends State<VillesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F9FF),
-      appBar: AppBar(
-        title: const Text('Villes'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: _ouvrirPopUpAjoutVille,
-          ),
-        ],
-      ),
       body: SafeArea(
-        child: ReorderableListView(
-          onReorder: (oldIndex, newIndex) {
-            setState(() {
-              if (newIndex > oldIndex) {
-                newIndex -= 1;
-              }
-              final item = _villes.removeAt(oldIndex);
-              _villes.insert(newIndex, item);
-            });
-          },
+        child: Stack(
           children: [
-            for (int index = 0; index < _villes.length; index++)
-              Dismissible(
-                key: ValueKey(_villes[index]),
-                onDismissed: (direction) {
-                  _supprimerVille(index);
+            Padding(
+              padding: const EdgeInsets.only(top: 50.0), // Décale les villes vers le bas
+              child: ReorderableListView(
+                onReorder: (oldIndex, newIndex) {
+                  setState(() {
+                    if (newIndex > oldIndex) {
+                      newIndex -= 1;
+                    }
+                    final item = _villes.removeAt(oldIndex);
+                    _villes.insert(newIndex, item);
+                  });
                 },
-                background: Container(color: Colors.red),
-                child: ListTile(
-                  title: Text(_villes[index]['ville']),
-                  subtitle: Text(
-                    "${_villes[index]['temperature']}°, "
-                    "${_villes[index]['condition']}",
-                  ),
-                ),
+                children: [
+                  for (int index = 0; index < _villes.length; index++)
+                    Dismissible(
+                      key: ValueKey(_villes[index]),
+                      onDismissed: (direction) {
+                        _supprimerVille(index);
+                      },
+                      background: Container(color: Colors.red),
+                      child: ListTile(
+                        title: Text(_villes[index]['ville']),
+                        subtitle: Text(
+                          "${_villes[index]['temperature']}°, "
+                          "${_villes[index]['condition']}",
+                        ),
+                      ),
+                    ),
+                ],
               ),
+            ),
+            Positioned(
+              top: 10,
+              right: 10,
+              child: ElevatedButton(
+                onPressed: _ouvrirPopUpAjoutVille,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue, // Thon bleuté color
+                ),
+                child: const Text('+ Ajouter'),
+              ),
+            ),
           ],
         ),
       ),
