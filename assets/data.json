@@ -1,24 +1,9 @@
 {
-    "villes_ajoutees": [
-      {
-        "ville": "Paris",
-        "temperature": 18,
-        "condition": "Cloudy"
-      },
-      {
-        "ville": "New York",
-        "temperature": 22,
-        "condition": "Rainy"
-      }
-    ],
-    "villes_favorites": [
-      {
-        "ville": "Paris",
-        "temperature": 18,
-        "condition": "Cloudy"
-      }
-    ],
-    "preferences": {
-      "theme": "light"
-    }
+  "villes_ajoutees": [
+  ],
+  "villes_favorites": [
+  ],
+  "preferences": {
+    "theme": "light"
   }
+}

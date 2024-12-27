@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 import 'package:terra_ciel/widgets/ville_card.dart';
 import 'package:terra_ciel/widgets/ajout_ville_popup.dart';
@@ -31,7 +33,7 @@ class AccueilScreenState extends State<AccueilScreen> {
     });
   }
 
-  void _ajouterVille(String ville, int temperature, String condition) {
+  Future<void> _ajouterVille(String ville, int temperature, String condition) async {
     setState(() {
       _villes.add({
         "ville": ville,
@@ -39,6 +41,25 @@ class AccueilScreenState extends State<AccueilScreen> {
         "condition": condition,
       });
     });
+
+    // Get the path to the app's documents directory
+    final directory = await getApplicationDocumentsDirectory();
+    final path = directory.path;
+    final file = File('$path/data.json');
+
+    // Read the current data from the file
+    final String currentData = await file.readAsString();
+    final data = json.decode(currentData);
+
+    // Add the new city to the data
+    data['villes_ajoutees'].add({
+      "ville": ville,
+      "temperature": temperature,
+      "condition": condition,
+    });
+
+    // Write the updated data back to the file
+    await file.writeAsString(json.encode(data));
   }
 
   void _ouvrirPopUpAjoutVille() {
@@ -105,21 +126,24 @@ class AccueilScreenState extends State<AccueilScreen> {
                   GestureDetector(
                     onTap: _ouvrirPopUpAjoutVille,
                     child: Container(
+                      width: 200,
                       margin: const EdgeInsets.only(right: 16),
-                      width: 150,
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        color: Colors.blue,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Center(
-                        child: Icon(Icons.add, size: 50, color: Colors.white),
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 50,
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
           ],
         ),
       ),
