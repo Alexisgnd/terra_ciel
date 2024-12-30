@@ -5,7 +5,7 @@ import 'preferences_screen.dart';
 import 'package:terra_ciel/widgets/hamburger_menu.dart';
 
 class MeteoClassiqueHome extends StatefulWidget {
-  const MeteoClassiqueHome({Key? key}) : super(key: key);
+  const MeteoClassiqueHome({super.key});
 
   @override
   State<MeteoClassiqueHome> createState() => _MeteoClassiqueHomeState();
